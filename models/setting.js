@@ -8,13 +8,10 @@ const settingSchema = new mongoose.Schema({
   value: {
     public_id: {
       type: String,
-      required: false,
     },
     url: {
       type: String,
-      required: false,
     },
-    required: false,
   },
   active: {
     type: Boolean,

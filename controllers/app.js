@@ -1,4 +1,4 @@
-import catchAsyncError from "../middlewares/catchAsyncError.js";
+import { catchAsyncError } from "../middlewares/catchAsyncError.js";
 import App from "../models/app.js";
 import ErrorHandler from "../utils/errorHandler.js";
 
@@ -15,6 +15,11 @@ export const getAllApps = catchAsyncError(async (req, res, next) => {
 });
 
 export const changeVisibility = catchAsyncError(async (req, res, next) => {
+  if (!req.isAuthenticated() || req.user.role !== "admin")
+    return next(
+      new ErrorHandler("You are not authorized to access this route", 401)
+    );
+
   const appName = req.params.name;
   if (!appName) {
     return next(new ErrorHandler("No app name found", 404));

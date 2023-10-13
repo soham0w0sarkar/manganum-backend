@@ -6,11 +6,11 @@ import {
   getShortcut,
 } from "../controllers/app.js";
 
-const app = express();
+const appRouter = express.Router();
 
-app.get("/getAllApps", getAllApps);
-app.get("/changeVisibility/:name", changeVisibility);
-app.get("/getShortcut/:name", getShortcut);
-app.get("/addShortcut/:name/:shortcut", addShortcut);
+appRouter.get("/getAllApps", getAllApps);
+appRouter.get("/changeVisibility/:name", changeVisibility);
+appRouter.get("/getShortcut/:name", getShortcut);
+appRouter.get("/addShortcut/:name/:shortcut", addShortcut);
 
-export default app;
+export default appRouter;
