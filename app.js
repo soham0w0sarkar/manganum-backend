@@ -14,8 +14,9 @@ intializePassport(passport);
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
-    resave: true,
+    resave: false,
     saveUninitialized: true,
+    cookie: { secure: false },
   })
 );
 app.use(passport.initialize());
@@ -25,13 +26,13 @@ app.get("/", (req, res) => {
   res.send("Hello Everynian!!");
 });
 
-import settingRouter from "./routes/setting.js";
-import appRouter from "./routes/app.js";
 import authRouter from "./routes/auth.js";
+import appRouter from "./routes/app.js";
+import backgroundRouter from "./routes/background.js";
 
-app.use("/setting", settingRouter);
-app.use("/app", appRouter);
 app.use("/auth", authRouter);
+app.use("/app", appRouter);
+app.use("/background", backgroundRouter);
 
 export default app;
 

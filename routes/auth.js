@@ -14,12 +14,16 @@ authRouter.get(
   "/google/callback",
   passport.authenticate("google", { failureRedirect: "/" }),
   (req, res) => {
+    console.log(req.isAuthenticated());
     res.redirect("/");
   }
 );
 
 authRouter.get("/logout", (req, res) => {
-  req.logout();
+  console.log(req.isAuthenticated());
+  req.session.destroy((err) => {
+    if (err) console.log(err);
+  });
   res.redirect("/");
 });
 
